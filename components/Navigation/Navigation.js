@@ -10,6 +10,9 @@ export default function Navigation() {
       <div>
         <Link href="/">Home</Link>
       </div>
+      <div>
+        <Link href="/posts">All Post</Link>
+      </div>
     </div>
   );
 }

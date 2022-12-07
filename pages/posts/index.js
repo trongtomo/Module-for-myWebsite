@@ -1,8 +1,8 @@
 import Head from "next/head";
-import LastestPost from "../components/Post/LastestPost";
+import AllPost from "../../components/Post/AllPost";
 import axios from "axios";
 import React from "react";
-export default function Home({ posts }) {
+export default function allPost({ posts }) {
   return (
     <div>
       <Head>
@@ -18,9 +18,9 @@ export default function Home({ posts }) {
         neque placerat ac.{" "}
       </p>
       <br />
-      <h2>Lastest posts</h2>
+      <h2>All posts</h2>
       <br />
-      <LastestPost posts={posts} />
+      <AllPost posts={posts} />
     </div>
   );
 }

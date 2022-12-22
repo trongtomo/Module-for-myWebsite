@@ -13,8 +13,8 @@ export default function Post({ post }) {
 
 export async function getStaticPaths() {
   const res = await axios.get("http://localhost:1337/api/blog-posts");
-
-  const paths = res.data.data.map((post) => {
+  const posts = await res.data.data;
+  const paths = posts.map((post) => {
     return { params: { id: post.id.toString() } };
   });
   return {
@@ -27,11 +27,12 @@ export async function getStaticProps({ params }) {
   const res = await axios.get(
     `http://localhost:1337/api/blog-posts/${params.id}`
   );
-  const html = await serialize(res.data.data.attributes.content);
+  const posts = await res.data.data;
+  const html = await serialize(posts.attributes.content);
   return {
     props: {
       post: {
-        title: res.data.data.attributes.title,
+        title: posts.attributes.title,
         content: html,
       },
     },

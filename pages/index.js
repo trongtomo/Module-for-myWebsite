@@ -24,10 +24,13 @@ export default function Home({ posts }) {
     </div>
   );
 }
-
 export async function getStaticProps() {
   const res = await axios.get("http://localhost:1337/api/blog-posts");
+  const posts = res.data.data;
+
   return {
-    props: { posts: res.data.data },
+    props: {
+      posts: posts,
+    },
   };
 }

@@ -1,24 +1,33 @@
 import Link from "next/link";
-import { useEffect, useInsertionEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
+//lastest post
 export default function LastestPost({ posts }) {
   const [latestPost, setLatestPost] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    setLatestPost(posts.slice(0, 5));
+    if (posts) {
+      setLatestPost(posts.slice(0, 5));
+      setIsLoading(false);
+    }
   }, [posts]);
-
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   function renderLastestPost() {
-    return (
-      latestPost &&
-      latestPost.map((post, i) => (
-        <Link key={i} href={`/posts/${post.id}`}>
-          <div className="card">
-            <h3>{post.attributes.title}</h3>
-            <p>{post.attributes.description}</p>
-          </div>
-        </Link>
-      ))
-    );
+    if (latestPost.length > 0) {
+      return (
+        latestPost &&
+        latestPost.map((post) => (
+          <Link key={post.id} href="/posts/[id]" as={`/posts/${post.id}`}>
+            <div className="card">
+              <h3>{post.attributes.title}</h3>
+              <p>{post.attributes.description}</p>
+            </div>
+          </Link>
+        ))
+      );
+    }
   }
   return <div>{renderLastestPost()}</div>;
 }

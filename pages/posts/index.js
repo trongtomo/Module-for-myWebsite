@@ -1,7 +1,7 @@
 import Head from "next/head";
-import AllPost from "../../components/Post/AllPost";
-import axios from "axios";
+import AllPost from "../../components/Post/Post";
 import React from "react";
+import axios from "axios";
 export default function allPost({ posts }) {
   return (
     <div>
@@ -24,10 +24,13 @@ export default function allPost({ posts }) {
     </div>
   );
 }
-
 export async function getStaticProps() {
   const res = await axios.get("http://localhost:1337/api/blog-posts");
+  const posts = res.data.data;
+
   return {
-    props: { posts: res.data.data },
+    props: {
+      posts: posts,
+    },
   };
 }

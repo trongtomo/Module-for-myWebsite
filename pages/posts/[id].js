@@ -1,7 +1,9 @@
+import Head from "next/head";
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
+const { request } = require("graphql-request");
 export default function Post({ post }) {
   return (
     <div>
@@ -12,8 +14,49 @@ export default function Post({ post }) {
 }
 
 export async function getStaticPaths() {
-  const res = await axios.get("http://localhost:1337/api/blog-posts");
-  const posts = await res.data.data;
+  const endpoint = "http://localhost:1337/graphql";
+  const query = `
+  query {
+    blogPosts {
+      data {
+        id
+        attributes {
+          title
+          description
+          slug
+          content
+          tags {
+            data {
+              attributes{
+                name
+              }
+              
+            }
+          }
+          author {
+            data {
+              attributes{
+                  name
+              }
+            }
+          }
+          media {
+            data {
+              attributes {
+                formats
+              }
+            }
+          }
+          createdAt
+          updatedAt
+          publishedAt
+        }
+      }
+    }
+  }
+  `;
+  const res = await request(endpoint, query);
+  const posts = res.blogPosts.data;
   const paths = posts.map((post) => {
     return { params: { id: post.id.toString() } };
   });
@@ -24,15 +67,58 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await axios.get(
-    `http://localhost:1337/api/blog-posts/${params.id}`
-  );
-  const posts = await res.data.data;
-  const html = await serialize(posts.attributes.content);
+  const endpoint = "http://localhost:1337/graphql";
+  const query = `
+  query {
+    blogPosts {
+      data {
+        id
+        attributes {
+          title
+          description
+          slug
+          content
+          tags {
+            data {
+              attributes{
+                name
+              }
+              
+            }
+          }
+          author {
+            data {
+              attributes{
+                  name
+              }
+            }
+          }
+          media {
+            data {
+              attributes {
+                formats
+              }
+            }
+          }
+          createdAt
+          updatedAt
+          publishedAt
+        }
+      }
+    }
+  }
+  `;
+  const variable = {
+    id: params.id,
+  };
+  const res = await request(endpoint, query, variable);
+  console.log(res);
+  const post = res.blogPosts.data;
+  const html = await serialize(post.attributes.content);
   return {
     props: {
       post: {
-        title: posts.attributes.title,
+        title: post.data.attributes.title,
         content: html,
       },
     },

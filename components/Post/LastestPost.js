@@ -19,7 +19,7 @@ export default function LastestPost({ posts }) {
       return (
         latestPost &&
         latestPost.map((post) => (
-          <Link key={post.id} href="/posts/[id]" as={`/posts/${post.id}`}>
+          <Link key={post.attributes.slug} href="/posts/[slug]" as={`/posts/${post.attributes.slug}`}>
             <div className="card">
               <h3>{post.attributes.title}</h3>
               <p>{post.attributes.description}</p>

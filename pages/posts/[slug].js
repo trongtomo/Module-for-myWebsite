@@ -58,7 +58,7 @@ export async function getStaticPaths() {
   const res = await request(endpoint, query);
   const posts = res.blogPosts.data;
   const paths = posts.map((post) => {
-    return { params: { id: post.id.toString() } };
+    return { params: { slug: post.attributes.slug.toString() } };
   });
   return {
     paths,
@@ -109,7 +109,7 @@ export async function getStaticProps({ params }) {
   }
   `;
   const variable = {
-    id: params.id,
+    slug: params.slug,
   };
   const res = await request(endpoint, query, variable);
   const post = res.blogPosts.data[0];

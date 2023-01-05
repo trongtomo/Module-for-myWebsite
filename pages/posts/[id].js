@@ -112,13 +112,14 @@ export async function getStaticProps({ params }) {
     id: params.id,
   };
   const res = await request(endpoint, query, variable);
-  console.log(res);
-  const post = res.blogPosts.data;
-  const html = await serialize(post.attributes.content);
+  const post = res.blogPosts.data[0];
+  const html = await serialize(post.attributes.content, {
+    mdxOptions: { development: false },
+  });
   return {
     props: {
       post: {
-        title: post.data.attributes.title,
+        title: post.attributes.title,
         content: html,
       },
     },

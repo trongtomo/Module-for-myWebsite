@@ -112,7 +112,8 @@ export async function getStaticProps({ params }) {
     slug: params.slug,
   };
   const res = await request(endpoint, query, variable);
-  const post = res.blogPosts.data[0];
+  const posts = res.blogPosts.data;
+  const post = posts.find((p) => p.attributes.slug === params.slug);
   const html = await serialize(post.attributes.content, {
     mdxOptions: { development: false },
   });

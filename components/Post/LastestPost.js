@@ -18,6 +18,7 @@ export default function LastestPost({ posts }) {
     return <div>Loading...</div>;
   }
   function renderLastestPost() {
+    const lastestPost = getLastElements(posts, 5);
     if (latestPost.length > 0) {
       return (
         latestPost &&

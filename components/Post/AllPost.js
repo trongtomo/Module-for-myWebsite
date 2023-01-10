@@ -14,13 +14,14 @@ export default function AllPost({ posts }) {
       const {
         meta: { pagination },
       } = res.data;
-      // Math.ceil 15/5 =3
+      // Math.ceil 6/5 =2 || 15/5 =3 meaning 15 post to display 5 post in 3 page
       setPageCount(Math.ceil(pagination.total / pageSize));
     }
     fetchData();
   }, [pageIndex]);
   const startIndex = (pageIndex - 1) * pageSize;
   const endIndex = startIndex + pageSize;
+  // get posts from parent then slice
   const currentPage = posts.slice(startIndex, endIndex);
   return (
     <>
@@ -31,9 +32,20 @@ export default function AllPost({ posts }) {
             href="/posts/[slug]"
             as={`/posts/${post.attributes.slug}`}
           >
+            {console.log(post.attributes.tags)}
             <div className="card">
               <h3>{post.attributes.title}</h3>
               <p>{post.attributes.description}</p>
+              <p>
+                {post.attributes.tags && post.attributes.tags.data
+                  ? post.attributes.tags.data.map((tag) => (
+                      <span key={tag.attributes.name}>
+                        {tag.attributes.name}
+                        &nbsp;
+                      </span>
+                    ))
+                  : null}
+              </p>
             </div>
           </Link>
         ))}

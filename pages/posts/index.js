@@ -1,8 +1,7 @@
 import Head from "next/head";
 import AllPost from "../../components/Post/AllPost";
 import React from "react";
-import axios from "axios";
-
+const { request } = require("graphql-request");
 export default function allPost({ posts }) {
   return (
     <div>
@@ -26,9 +25,50 @@ export default function allPost({ posts }) {
   );
 }
 export async function getStaticProps() {
-  const res = await axios.get("http://localhost:1337/api/blog-posts");
-  const posts = res.data.data;
+  const endpoint = "http://localhost:1337/graphql";
+  const query = `
+  query {
+    blogPosts {
+      data {
+        id
+        attributes {
+          title
+          description
+          slug
+          content
+          tags {
+            data {
+              attributes{
+                name
+              }
+              
+            }
+          }
+          author {
+            data {
+              attributes{
+                  name
+              }
+            }
+          }
+          media {
+            data {
+              attributes {
+                formats
+              }
+            }
+          }
+          createdAt
+          updatedAt
+          publishedAt
+        }
+      }
+    }
+  }
+  `;
 
+  const res = await request(endpoint, query);
+  const posts = res.blogPosts.data;
   return {
     props: {
       posts: posts,

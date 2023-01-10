@@ -32,7 +32,6 @@ export default function AllPost({ posts }) {
             href="/posts/[slug]"
             as={`/posts/${post.attributes.slug}`}
           >
-            {console.log(post.attributes.tags)}
             <div className="card">
               <h3>{post.attributes.title}</h3>
               <p>{post.attributes.description}</p>

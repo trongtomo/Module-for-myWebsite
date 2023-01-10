@@ -7,8 +7,24 @@ const { request } = require("graphql-request");
 export default function Post({ post }) {
   return (
     <div>
-      <h1>{post.title}</h1>
-      <MDXRemote {...post.content} />
+      <Head>
+        <title>{[post.title].join("")}</title>
+        <br />
+      </Head>
+      <post>
+        <header>{post.description}</header>
+        <main>
+          <header>
+            {post.tags.map((tag) => (
+              <span key={tag}>{tag}&nbsp;</span>
+            ))}
+          </header>
+          <content>
+            <MDXRemote {...post.content} />
+          </content>
+          <footer>{post.author}</footer>
+        </main>
+      </post>
     </div>
   );
 }
@@ -117,11 +133,16 @@ export async function getStaticProps({ params }) {
   const html = await serialize(post.attributes.content, {
     mdxOptions: { development: false },
   });
+  //1 post has many tag
+  const tags = post.attributes.tags.data.map((tag) => tag.attributes.name);
   return {
     props: {
       post: {
         title: post.attributes.title,
         content: html,
+        description: post.attributes.description,
+        author: post.attributes.author.data.attributes.name,
+        tags: tags,
       },
     },
   };

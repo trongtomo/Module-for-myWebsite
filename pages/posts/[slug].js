@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import React from "react";
 // import axios from "axios";
 import { serialize } from "next-mdx-remote/serialize";
@@ -16,7 +17,9 @@ export default function Post({ post }) {
         <main>
           <header>
             {post.tags.map((tag) => (
-              <span key={tag}>{tag}&nbsp;</span>
+              <Link key={tag} href="/tags/[tag]" as={`/tags/${tag}`}>
+                <span>{tag} &nbsp;</span>
+              </Link>
             ))}
           </header>
           <content>

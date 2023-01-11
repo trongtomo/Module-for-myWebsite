@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 export default function AllTag({ posts }) {
   const allTags = posts.reduce((allTags, post) => {
     post.attributes.tags.data.forEach((tag) => {
@@ -14,9 +14,17 @@ export default function AllTag({ posts }) {
   return (
     <div>
       {Object.entries(allTags).map(([name, count]) => (
-        <p key={name}>
-          {name} ({count})
-        </p>
+        <Link
+          key={name}
+          href="/tags/[tag]"
+          as={`/tags/${name}`}
+        >
+          <span>
+            {name}
+            ({count})
+            &nbsp;
+          </span>
+        </Link>
       ))}
     </div>
   );

@@ -1,9 +1,8 @@
 import Head from "next/head";
 import React from "react";
-import Link from "next/link";
 import AllTag from "../../components/Tag/AllTag";
 const { request } = require("graphql-request");
-export default function Tags({ posts }) {
+export default function allTag({ posts }) {
   return (
     <div>
       <Head>

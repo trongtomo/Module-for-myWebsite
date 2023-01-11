@@ -38,16 +38,16 @@ export default function AllPost({ posts }) {
               <p>
                 {post.attributes.tags && post.attributes.tags.data
                   ? post.attributes.tags.data.map((tag) => (
-                      // <Link
-                      //   key={tag.attributes.name}
-                      //   href="/tags/[tag]"
-                      //   as={`/tags/${tag.attributes.name}`}
-                      // >
-                      <span>
-                        {tag.attributes.name}
-                        &nbsp;
-                      </span>
-                      // </Link>
+                      <Link
+                        key={tag.attributes.name}
+                        href="/tags/[tag]"
+                        as={`/tags/${tag.attributes.name}`}
+                      >
+                        <span>
+                          {tag.attributes.name}
+                          &nbsp;
+                        </span>
+                      </Link>
                     ))
                   : null}
               </p>

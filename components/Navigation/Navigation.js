@@ -13,6 +13,9 @@ export default function Navigation() {
       <div>
         <Link href="/posts">All Post</Link>
       </div>
+      <div>
+        <Link href="/tags">Tags</Link>
+      </div>
     </div>
   );
 }

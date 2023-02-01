@@ -26,7 +26,7 @@ export default function Home({ posts }) {
   );
 }
 export async function getStaticProps() {
-  const res = await axios.get("http://localhost:1337/api/blog-posts");
+  const res = await axios.get("http://127.0.0.1:1337/api/blog-posts");
   const posts = res.data.data;
   return {
     props: {

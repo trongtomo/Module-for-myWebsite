@@ -25,7 +25,7 @@ export default function allPost({ posts }) {
   );
 }
 export async function getStaticProps() {
-  const endpoint = "http://localhost:1337/graphql";
+  const endpoint = "http://127.0.0.1:1337/graphql";
   const query = `
   query {
     blogPosts {

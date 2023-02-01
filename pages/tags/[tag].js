@@ -23,7 +23,7 @@ export default function Tag({ posts, tag }) {
   );
 }
 export async function getStaticPaths() {
-  const endpoint = "http://localhost:1337/graphql";
+  const endpoint = "http://127.0.0.1:1337/graphql";
   const query = `
       query {
         blogPosts {
@@ -88,7 +88,7 @@ export async function getStaticPaths() {
   };
 }
 export async function getStaticProps({ params }) {
-  const endpoint = "http://localhost:1337/graphql";
+  const endpoint = "http://127.0.0.1:1337/graphql";
   const query = `
     query {
         blogPosts {

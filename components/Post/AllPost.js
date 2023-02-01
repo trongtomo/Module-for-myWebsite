@@ -8,7 +8,7 @@ export default function AllPost({ posts }) {
   useEffect(() => {
     async function fetchData() {
       const res = await axios.get(
-        `http://localhost:1337/api/blog-posts?_page=${pageIndex}&_limit=${pageSize}`
+        `http://127.0.0.1:1337/api/blog-posts?_page=${pageIndex}&_limit=${pageSize}`
       );
       // assign variable from object
       const {

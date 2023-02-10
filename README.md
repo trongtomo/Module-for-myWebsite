@@ -34,7 +34,7 @@ yarn build
 
 ## ⚙️ Deployment
 
-Customized your .env file with .env.example
+Copy all .evn.example to .env and customized these under your .env file with your settings
 
 ```
 DATABASE_HOST=
@@ -43,3 +43,7 @@ DATABASE_NAME=
 DATABASE_USERNAME=
 DATABASE_PASSWORD=
 ```
+
+## Strapi setting when you successful deploy
+
+Head to roles->setting users public and grant your api access, you can grant all but in my case just need "findOne" and "findAll"

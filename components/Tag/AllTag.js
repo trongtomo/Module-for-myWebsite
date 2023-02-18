@@ -13,19 +13,17 @@ export default function AllTag({ posts }) {
   }, {});
   return (
     <div>
-      {Object.entries(allTags).map(([name, count]) => (
-        <Link
-          key={name}
-          href="/tags/[tag]"
-          as={`/tags/${name}`}
-        >
-          <span>
-            {name}
-            ({count})
-            &nbsp;
-          </span>
-        </Link>
-      ))}
+      {Object.entries(allTags).length === 0 ? (
+        <span>No tags</span>
+      ) : (
+        Object.entries(allTags).map(([name, count]) => (
+          <Link key={name} href="/tags/[tag]" as={`/tags/${name}`}>
+            <span>
+              {name}({count}) &nbsp;
+            </span>
+          </Link>
+        ))
+      )}
     </div>
   );
 }

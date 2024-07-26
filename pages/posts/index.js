@@ -1,6 +1,6 @@
 import Head from "next/head";
-import AllPost from "../../components/Post/AllPost";
 import React from "react";
+import AllPost from "../../components/Post/AllPost";
 const { request } = require("graphql-request");
 export default function allPost({ posts }) {
   return (
@@ -12,10 +12,11 @@ export default function allPost({ posts }) {
       </Head>
       <h1>Welcome to the CoderBlog</h1>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eu metus
-        turpis. Cras posuere blandit erat, eu maximus erat rutrum ac. Aenean
-        suscipit et ligula nec feugiat. Sed maximus purus nunc, ut sagittis
-        neque placerat ac.{" "}
+        At CoderBlog, we bring you the latest in web development, programming
+        tips, and tech trends. Dive into our expert articles, tutorials, and
+        insights designed to help you enhance your coding skills. Whether you're
+        a beginner or a seasoned developer, CoderBlog is your go-to resource for
+        staying up-to-date and advancing your career.{" "}
       </p>
       <br />
       <h2>All posts</h2>

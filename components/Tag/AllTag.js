@@ -1,5 +1,5 @@
-import React from "react";
 import Link from "next/link";
+import React from "react";
 export default function AllTag({ posts }) {
   const allTags = posts.reduce((allTags, post) => {
     post.attributes.tags.data.forEach((tag) => {
@@ -18,7 +18,7 @@ export default function AllTag({ posts }) {
       ) : (
         Object.entries(allTags).map(([name, count]) => (
           <Link key={name} href="/tags/[tag]" as={`/tags/${name}`}>
-            <span>
+            <span style={{ color: "blue" }}>
               {name}({count}) &nbsp;
             </span>
           </Link>

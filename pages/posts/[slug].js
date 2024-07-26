@@ -2,8 +2,8 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 // import axios from "axios";
-import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
 const { request } = require("graphql-request");
 export default function Post({ post }) {
   return (
@@ -12,19 +12,18 @@ export default function Post({ post }) {
         <title>{[post.title].join("")}</title>
         <br />
       </Head>
+      <header>{post.description}</header>
       <post>
-        <header>{post.description}</header>
         <main>
-          <header>
-            {post.tags.map((tag) => (
-              <Link key={tag} href="/tags/[tag]" as={`/tags/${tag}`}>
-                <span>{tag} &nbsp;</span>
-              </Link>
-            ))}
-          </header>
+          <header></header>
           <content>
             <MDXRemote {...post.content} />
           </content>
+          {post.tags.map((tag) => (
+            <Link key={tag} href="/tags/[tag]" as={`/tags/${tag}`}>
+              <span style={{ color: "blue" }}>{tag} &nbsp;</span>
+            </Link>
+          ))}
           <footer>{post.author}</footer>
         </main>
       </post>

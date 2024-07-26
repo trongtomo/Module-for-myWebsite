@@ -43,7 +43,7 @@ export default function AllPost({ posts }) {
                         href="/tags/[tag]"
                         as={`/tags/${tag.attributes.name}`}
                       >
-                        <span>
+                        <span style={{ color: "blue" }}>
                           {tag.attributes.name}
                           &nbsp;
                         </span>
